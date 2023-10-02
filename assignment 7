@@ -1,0 +1,61 @@
+ques 1
+
+select count(onum) from orders where odate='1990-10-03';
++-------------+
+| count(onum) |
++-------------+
+|           5 |
++-------------+
+
+
+ques 2 
+
+select distinct city, count(city) from customers group by city;
++----------+-------------+
+| city     | count(city) |
++----------+-------------+
+| London   |           2 |
+| Rome     |           2 |
+| San Jose |           2 |
+| Berlin   |           1 |
++----------+-------------+
+
+
+
+ques 3
+
+select customers.cname ,min(orders.amt) from orders,customers where customers.cnum=orders.cnum group by customers.cname order by 1;
++----------+-----------------+
+| cname    | min(orders.amt) |
++----------+-----------------+
+| Cisneros |           18.69 |
+| Clemens  |         4723.00 |
+| Giovanni |         1713.23 |
+| Grass    |           75.75 |
+| Hoffman  |          767.19 |
+| Liu      |         5160.45 |
+| Pereira  |         1900.10 |
++----------+-----------------+
+
+ques4
+
+select cname  from customers where substr(cname,1,1)='g' order by cname asc;
+
++----------+
+| cname    |
++----------+
+| Giovanni |
+| Grass    |
++----------+
+
+
+ques 5 
+select rating from customers where city=city group by rating  having max(rating);
++--------+
+| rating |
++--------+
+|    100 |
+|    200 |
+|    300 |
++--------+
+

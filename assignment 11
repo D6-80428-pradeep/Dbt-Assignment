@@ -1,0 +1,25 @@
+ques 1 
+select onum from orders where snum=(select snum from customers where cname='cisneros');
++------+
+| onum |
++------+
+| 3001 |
+| 3006 |
++------+
+
+
+ques 2
+
+select distinct  cname, rating from customers, orders where orders.snum=customers.snum and amt>(select avg(amt) from orders);
++---------+--------+
+| cname   | rating |
++---------+--------+
+| Hoffman |    100 |
+| Liu     |    200 |
+| Grass   |    300 |
+| Clemens |    100 |
++---------+--------+
+
+
+
+ques 3

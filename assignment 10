@@ -1,0 +1,22 @@
+assignment 10
+
+ques 1
+
+select distinct p.sname from salespeople p, salespeople d where p.city=d.city and p.sname!=d.sname;
+| sname  |
++--------+
+| Motika |
+| Peel   
+
+
+
+
+ques 2 
+
+select distinct cname,city from customers where rating=(select rating from customers where cname='hoffman');\
+
+cname   | city   |
++---------+--------+
+| Hoffman | London |
+| Clemens | London |
+| Pereira | Rome   |
