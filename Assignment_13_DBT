@@ -1,0 +1,51 @@
+1) Create a union of two queries that shows the names, cities, and ratings of all customers. Those
+with rating of 200 or greater will also have the words “High Rating”, while the others will have
+the words “Low Rating”.
+
+select cname,city,rating,if(rating > 200,"High rating","Low rating") from customers union select cname,city,rating,if(rating > 200,"High rating","Low rating") from customers;
++----------+----------+--------+---------------------------------------------+
+| cname    | city     | rating | if(rating > 200,"High rating","Low rating") |
++----------+----------+--------+---------------------------------------------+
+| Hoffman  | London   |    100 | Low rating                                  |
+| Giovanni | Rome     |    200 | Low rating                                  |
+| Liu      | San Jose |    200 | Low rating                                  |
+| Grass    | Berlin   |    300 | High rating                                 |
+| Clemens  | London   |    100 | Low rating                                  |
+| Cisneros | San Jose |    300 | High rating                                 |
+| Pereira  | Rome     |    100 | Low rating                                  |
++----------+----------+--------+---------------------------------------------+
+
+2)Write a command that produces the name and number of each salesperson and each customer with
+more than one current order. Put the results in alphabetical order.
+
+select snum,sname,cnum,cname from (select salespeople.snum,salespeople.sname,customers.cnum,customers.cname,count(customers.cnum) c_cnum,count(salespeople.snum) c_snum from salespeople,customers,orders where orders.snum = salespeople.snum and customers.cnum = orders.cnum and orders.o
+date =  "1990-10-04" group by salespeople.snum,customers.cnum,salespeople.sname,customers.cname)abcd where c_cnum > 1;
++------+--------+------+-------+
+| snum | sname  | cnum | cname |
++------+--------+------+-------+
+| 1002 | Serres | 2004 | Grass |
++------+--------+------+-------+
+
+
+3)Form a union of three queries. Have the first select the snums of all salespeople in San Jose;
+the second, the cnums of all customers in San Jose; and the third the onums of all orders on
+October 3. Retain duplicates between the last two queries but eliminate any redundancies between
+either of them and the first.(Note: in the sample tables as given, there would
+be no such redundancy. This is besides the point.)
+
+select cnum as "cnum,snum,onum" from customers where city = "San Jose" union select snum from salespeople where city = "San Jose" unio
+n select onum from orders where odate = "1990-10-03";
++----------------+
+| cnum,snum,onum |
++----------------+
+|           2003 |
+|           2008 |
+|           1002 |
+|           3001 |
+|           3003 |
+|           3002 |
+|           3005 |
+|           3006 |
++----------------+
+
+

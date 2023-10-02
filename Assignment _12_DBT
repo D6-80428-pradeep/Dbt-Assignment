@@ -1,0 +1,35 @@
+Assignment 12:
+1) Write a query that selects all customers whose ratings are equal to or greater than ANY of Serres’.
+
+select * from customers where rating >= any(select rating from customers,salespeople where salespeople.snum = customers.snum and sname
+ = "Serres");
++------+----------+----------+--------+------+
+| cnum | cname    | city     | rating | snum |
++------+----------+----------+--------+------+
+| 2002 | Giovanni | Rome     |    200 | 1003 |
+| 2003 | Liu      | San Jose |    200 | 1002 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
++------+----------+----------+--------+------+
+
+2) Write a query using ANY or ALL that will find all salespeople who have no customers located in their city.
+
+<pre>select sname,city from salespeople where city != all(select distinct(salespeople.city) from customers,salespeople where customers.city = salespeople.city);
++---------+-----------+
+| sname   | city      |
++---------+-----------+
+| Rifkin  | Barcelona |
+| Axelrod | New York  |
++---------+-----------+
+
+3) Write a query that selects all orders for amounts greater than any for the customers in London.
+select onum from orders where amt = any(select amt from orders,customers where customers.cnum = orders.cnum and customers.city = "London");
++------+
+| onum |
++------+
+| 3003 |
+| 3008 |
+| 3011 |
++------+
+
+

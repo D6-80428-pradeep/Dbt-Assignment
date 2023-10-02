@@ -1,0 +1,17 @@
+Assignment 3:
+Q1)Does ANSI recognize the data type DATE?
+Ans:The ANSI SQL standards specify qualifiers and formats for character representations of DATETIME and INTERVAL values. The standard qualifier    for a DATETIME value is YEAR TO SECOND, and the standard format is as follows:
+YYYY-MM-DD HH:MM:SS
+The standards for an INTERVAL value specify the following two classes of intervals:
+The YEAR TO MONTH class has the format: YYYY-MM
+A subset of this format is also valid: for example, just a month interval.
+
+The DAY TO FRACTION class has the format: DD HH:MM:SS.F
+Any subset of contiguous fields is also valid: for example, MINUTE TO FRACTION.
+
+Q2:Which subdivision of SQL is used to insert
+values in tables?
+Ans: INSERT STATEMENT IS USED TO ENTER VALUES IN TO SQL TABLES,ITS A DATA MANIPULATION COMMAND.
+SYNTAX: 
+INSERT IN TO <TABLESNAME>(COLUMN1,COLUMN2.........) VALUES (....),(.......);
+

@@ -1,0 +1,82 @@
+3) Write a command that increases the rating of all customers in Rome by 100.
+
+update customers set rating = rating+100 where city = "Rome";
+
+Query OK, 2 rows affected (0.02 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+D6_80237_RAHUL>_select * from customers;
++------+----------+----------+--------+------+
+| cnum | cname    | city     | rating | snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    300 | 1003 |
+| 2003 | Liu      | San Jose |    200 | 1002 |
+| 2004 | Grass    | Berlin   |    300 | 1002 |
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    200 | 1004 |
++------+----------+----------+--------+------+
+7 rows in set (0.00 sec)
+
+2) Write a command that removes all orders from customer Clemens from the Orders table.
+
+delete from orders where cnum = (select cnum from customers where cname = "Clemens");
+Query OK, 2 rows affected (0.02 sec)
+
+D6_80237_RAHUL>_select * from orders;;
++------+---------+------------+------+------+
+| onum | amt     | odate      | cnum | snum |
++------+---------+------------+------+------+
+| 3001 |   18.69 | 1990-10-03 | 2008 | 1007 |
+| 3003 |  767.19 | 1990-10-03 | 2001 | 1001 |
+| 3002 | 1900.10 | 1990-10-03 | 2007 | 1004 |
+| 3005 | 5160.45 | 1990-10-03 | 2003 | 1002 |
+| 3006 | 1098.16 | 1990-10-03 | 2008 | 1007 |
+| 3009 | 1713.23 | 1990-10-04 | 2002 | 1003 |
+| 3007 |   75.75 | 1990-10-04 | 2004 | 1002 |
+| 3010 |  309.95 | 1990-10-04 | 2004 | 1002 |
++------+---------+------------+------+------+
+
+1) Write a command that puts the following values, in their given order, into the salespeople table:
+city – San Jose, name – Blanco, comm – NULL, snum – 1100.
+
+insert into salespeople (city,sname,comm,snum) values ("San Jose","Blanco",Null,1100);
+Query OK, 1 row affected (0.02 sec)
+
+D6_80237_RAHUL>_select * from salespeople;
++------+---------+-----------+------+
+| snum | sname   | city      | comm |
++------+---------+-----------+------+
+| 1001 | Peel    | London    | 0.12 |
+| 1002 | Serres  | San Jose  | 0.13 |
+| 1004 | Motika  | London    | 0.11 |
+| 1007 | Rifkin  | Barcelona | 0.15 |
+| 1003 | Axelrod | New York  | 0.10 |
+| 1100 | Blanco  | San Jose  | NULL |
++------+---------+-----------+------+
+6 rows in set (0.00 sec)
+
+4) Salesperson Serres has left the company.Assign her customers to Motika.
+
+update customers set snum = (select snum from salespeople where sname = "Motika") where snum = (select snum from salespeople where sna
+me = "Serres");
+
+Query OK, 2 rows affected (0.04 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+D6_80237_RAHUL>_select * from  customers;
++------+----------+----------+--------+------+
+| cnum | cname    | city     | rating | snum |
++------+----------+----------+--------+------+
+| 2001 | Hoffman  | London   |    100 | 1001 |
+| 2002 | Giovanni | Rome     |    300 | 1003 |
+| 2003 | Liu      | San Jose |    200 | 1004 |
+| 2004 | Grass    | Berlin   |    300 | 1004 |
+| 2006 | Clemens  | London   |    100 | 1001 |
+| 2008 | Cisneros | San Jose |    300 | 1007 |
+| 2007 | Pereira  | Rome     |    200 | 1004 |
++------+----------+----------+--------+------+
+
+
+
